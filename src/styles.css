@@ -77,3 +77,7 @@ button.remove {
     margin-top: 2rem;
   }
 }
+
+[title][role="img"] {
+  cursor: help;
+}

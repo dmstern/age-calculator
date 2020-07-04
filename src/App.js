@@ -14,7 +14,7 @@ export default class App extends Component {
     this.handleUnitChange();
   }
 
-  submit = event => {
+  submit = (event) => {
     event.preventDefault();
     var name = document.querySelector("[name=name]").value;
     var birthDate = document.querySelector("[name=birthday]").value;
@@ -27,8 +27,7 @@ export default class App extends Component {
         name={name}
         birthDate={birthDate}
         birthTime={birthTime}
-        getFactor={this.getFactor}
-        getUnitLabel={this.getUnitLabel}
+        getUnit={() => this.units[this.state.unit]}
         remove={() => {
           this.removePerson(hash);
         }}
@@ -36,7 +35,7 @@ export default class App extends Component {
     );
 
     this.setState({
-      persons
+      persons,
     });
 
     document.getElementById("form").reset();
@@ -45,29 +44,23 @@ export default class App extends Component {
   removePerson(id) {
     var really = window.confirm(
       `Willst du ${
-        this.state.persons.find(person => person.props.id === id).props.name
+        this.state.persons.find((person) => person.props.id === id).props.name
       } wirklich aus der Liste entfernen?`
     );
     if (really) {
-      var persons = this.state.persons.filter(person => person.props.id !== id);
+      var persons = this.state.persons.filter(
+        (person) => person.props.id !== id
+      );
       this.setState({
-        persons
+        persons,
       });
     }
   }
 
-  getFactor = () => {
-    return this.units[this.state.unit].factor;
-  };
-
-  getUnitLabel = () => {
-    return this.units[this.state.unit].label;
-  };
-
   handleUnitChange = () => {
     var unit = document.querySelector("[name=unit]").value;
     this.setState({
-      unit
+      unit,
     });
   };
 
@@ -88,13 +81,13 @@ export default class App extends Component {
             </label>
             <div className="formFooter">
               <button type="submit">
-                <span role="img" aria-labelledby="Add">
+                <span role="img" aria-label="Add">
                   ➕ Hinzufügen
                 </span>
               </button>
               <button type="reset">
                 {" "}
-                <span role="img" aria-labelledby="Reset">
+                <span role="img" aria-label="Reset">
                   🔃
                 </span>{" "}
                 Zurücksetzen
@@ -104,9 +97,17 @@ export default class App extends Component {
           <form>
             <label>
               <span>Einheit: </span>
-              <select name="unit" onChange={this.handleUnitChange}>
+              <select
+                name="unit"
+                defaultValue={
+                  Object.entries(this.units).find(
+                    ([key, unit]) => unit.isDefault
+                  )[0]
+                }
+                onChange={this.handleUnitChange}
+              >
                 {Object.entries(this.units).map(([key, value]) => (
-                  <option value={key} name={key} selected={value.isDefault}>
+                  <option value={key} name={key} key={key}>
                     {value.label}
                   </option>
                 ))}
@@ -115,7 +116,7 @@ export default class App extends Component {
           </form>
         </div>
         <div className="persons">
-          {this.state.persons.map(person => person)}
+          {this.state.persons.map((person) => person)}
         </div>
       </div>
     );
