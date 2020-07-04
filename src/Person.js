@@ -28,7 +28,7 @@ export default class Person extends Component {
       <div className="person">
         {this.props.name} (*️{this.state.birthday}) ist jetzt {this.state.age}{" "}
         {this.props.getUnitLabel()} alt.
-        <button className="remove" onClick={this.props.remove}>
+        <button className="remove" onClick={this.props.remove} title="Entfernen">
           <span role="img" aria-labelledby="Remove">
             ➖
           </span>
