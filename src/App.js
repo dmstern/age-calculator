@@ -1,48 +1,12 @@
 import React, { Component } from "react";
 import "./styles.css";
 import Person from "./Person";
+import units from "./Units";
 
 export default class App extends Component {
   constructor() {
     super();
-    this.units = {
-      milliseconds: {
-        factor: 1,
-        label: "Millisekunden"
-      },
-      seconds: {
-        factor: 1000,
-        label: "Sekunden"
-      },
-      minutes: {
-        factor: 1000 * 60,
-        label: "Minuten"
-      },
-      hours: {
-        factor: 1000 * 60 * 60,
-        label: "Stunden"
-      },
-      days: {
-        factor: 1000 * 60 * 60 * 24,
-        label: "Tage"
-      },
-      weeks: {
-        factor: 1000 * 60 * 60 * 24 * 7,
-        label: "Wochen"
-      },
-      months: {
-        factor: 1000 * 60 * 60 * 24 * 30.4,
-        label: "Monate"
-      },
-      years: {
-        factor: 1000 * 60 * 60 * 24 * 365,
-        label: "Jahre"
-      },
-      marsyears: {
-        factor: 1000 * 60 * 60 * 24 * 687,
-        label: "Marsjahre"
-      }
-    };
+    this.units = units;
     this.state = { persons: [] };
   }
 
@@ -142,7 +106,7 @@ export default class App extends Component {
               <span>Einheit: </span>
               <select name="unit" onChange={this.handleUnitChange}>
                 {Object.entries(this.units).map(([key, value]) => (
-                  <option value={key} name={key}>
+                  <option value={key} name={key} selected={value.isDefault}>
                     {value.label}
                   </option>
                 ))}
