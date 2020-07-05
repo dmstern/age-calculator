@@ -5,7 +5,7 @@ export default class Person extends Component {
   constructor(state, props) {
     super(state, props);
     this.state = {};
-    this.init();
+    setInterval(this.update, 1);
   }
 
   componentDidMount() {
@@ -78,52 +78,50 @@ export default class Person extends Component {
     );
   }
 
-  init() {
-    setInterval(() => {
-      var now = new Date().getTime();
+  update = () => {
+    var now = new Date().getTime();
 
-      var age = Math.floor(
-        (now - this.state.birthdayTime) / this.props.getUnit().factor
-      );
+    var age = Math.floor(
+      (now - this.state.birthdayTime) / this.props.getUnit().factor
+    );
 
-      var length = age.toString().length - 1;
-      var divisor = Math.pow(10, length);
-      var decimal = age / divisor;
-      var ceil = Math.ceil(decimal);
-      var factor = Math.pow(10, length);
-      var next1 = ceil * factor;
-      var next2 = Math.pow(10, length + 1);
-      var next3 = next2 * 0.25;
-      var next4 = next2 * 0.5;
-      var next5 = next2 * 0.75;
+    var length = age.toString().length - 1;
+    var divisor = Math.pow(10, length);
+    var decimal = age / divisor;
+    var ceil = Math.ceil(decimal);
+    var factor = Math.pow(10, length);
+    var next1 = ceil * factor;
+    var next2 = Math.pow(10, length + 1);
+    var next3 = next2 * 0.25;
+    var next4 = next2 * 0.5;
+    var next5 = next2 * 0.75;
 
-      var next = [
-        {
-          age: next1,
-          date: this.toDate(next1),
-        },
-        {
-          age: next3,
-          date: this.toDate(next3),
-        },
-        {
-          age: next4,
-          date: this.toDate(next4),
-        },
-        {
-          age: next5,
-          date: this.toDate(next5),
-        },
-        {
-          age: next2,
-          date: this.toDate(next2),
-        },
-      ];
+    var next = [
+      {
+        age: next1,
+        date: this.toDate(next1),
+      },
+      {
+        age: next3,
+        date: this.toDate(next3),
+      },
+      {
+        age: next4,
+        date: this.toDate(next4),
+      },
+      {
+        age: next5,
+        date: this.toDate(next5),
+      },
+      {
+        age: next2,
+        date: this.toDate(next2),
+      },
+    ];
 
-      this.setState({
-        age,
-        next,
-      });
-    }, 1);
-  }
+    this.setState({
+      age,
+      next,
+    });
+  };
 }
