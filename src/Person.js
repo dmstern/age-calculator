@@ -36,23 +36,31 @@ export default class Person extends Component {
         </span>{" "}
         ist jetzt {Number(this.state.age).toLocaleString()}{" "}
         {this.props.getUnit().label} alt.
-        <span
-          title={`Nächster runder Geburtsmoment: \n ${
-            this.state.next &&
-            this.state.next
-              .map(
-                (next) =>
-                  `• ${Number(next.age).toLocaleString()} ${
-                    this.props.getUnit().label
-                  }: ${next.date}\n`
-              )
-              .join("")
-          }`}
-          role="img"
-          aria-label="Next Birthday"
-        >
-          🎉
-        </span>
+        <details>
+          <summary>
+            <span
+              role="img"
+              title="Nächster runder Geburtsmoment"
+              aria-label="Next Birthday"
+            >
+              Nächster runder Geburtsmoment: 🎉
+            </span>
+          </summary>
+          <ul>
+            {this.state.next &&
+              this.state.next.map((next) => {
+                var now = new Date().getTime();
+                var className = next.date - now < 0 ? "past" : "future";
+                return (
+                  <li className={className}>
+                    {Number(next.age).toLocaleString()}{" "}
+                    {this.props.getUnit().label}:{" "}
+                    {new Date(next.date).toLocaleString()}
+                  </li>
+                );
+              })}
+          </ul>
+        </details>
         <button
           className="remove"
           onClick={this.props.remove}
@@ -67,9 +75,9 @@ export default class Person extends Component {
   }
 
   toDate(nextTimeStamp) {
-    return new Date(
+    return (
       this.state.birthdayTime + nextTimeStamp * this.props.getUnit().factor
-    ).toLocaleString();
+    );
   }
 
   init() {
