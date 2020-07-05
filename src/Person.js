@@ -37,10 +37,16 @@ export default class Person extends Component {
         ist jetzt {Number(this.state.age).toLocaleString()}{" "}
         {this.props.getUnit().label} alt.
         <span
-          title={`Nächster runder Geburtsmoment (${Number(
+          title={`Nächster runder Geburtsmoment: \n ${
+            this.state.next &&
             this.state.next
-          ).toLocaleString()} ${this.props.getUnit().label}): ${
-            this.state.nextBirthday
+              .map(
+                (next) =>
+                  `• ${Number(next.age).toLocaleString()} ${
+                    this.props.getUnit().label
+                  }: ${next.date}\n`
+              )
+              .join("")
           }`}
           role="img"
           aria-label="Next Birthday"
@@ -60,6 +66,12 @@ export default class Person extends Component {
     );
   }
 
+  toDate(nextTimeStamp) {
+    return new Date(
+      this.state.birthdayTime + nextTimeStamp * this.props.getUnit().factor
+    ).toLocaleString();
+  }
+
   init() {
     setInterval(() => {
       var now = new Date().getTime();
@@ -73,15 +85,38 @@ export default class Person extends Component {
       var decimal = age / divisor;
       var ceil = Math.ceil(decimal);
       var factor = Math.pow(10, length);
-      var next = ceil * factor;
+      var next1 = ceil * factor;
+      var next2 = Math.pow(10, length + 1);
+      var next3 = next2 * 0.25;
+      var next4 = next2 * 0.5;
+      var next5 = next2 * 0.75;
 
-      var nextBirthday =
-        this.state.birthdayTime + next * this.props.getUnit().factor;
+      var next = [
+        {
+          age: next1,
+          date: this.toDate(next1),
+        },
+        {
+          age: next3,
+          date: this.toDate(next3),
+        },
+        {
+          age: next4,
+          date: this.toDate(next4),
+        },
+        {
+          age: next5,
+          date: this.toDate(next5),
+        },
+        {
+          age: next2,
+          date: this.toDate(next2),
+        },
+      ];
 
       this.setState({
         age,
         next,
-        nextBirthday: `${new Date(nextBirthday).toLocaleString()}`,
       });
     }, 1);
   }
