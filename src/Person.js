@@ -44,17 +44,19 @@ export default class Person extends Component {
           </summary>
           <ul>
             {this.state.next &&
-              this.state.next.map((next) => {
-                var now = new Date().getTime();
-                var className = next.date - now < 0 ? "past" : "future";
-                return (
-                  <li className={className}>
-                    {Number(next.age).toLocaleString()}{" "}
-                    {this.props.getUnit().label}:{" "}
-                    {new Date(next.date).toLocaleString()}
-                  </li>
-                );
-              })}
+              this.state.next
+                .sort((a, b) => a.age - b.age)
+                .map((next) => {
+                  var now = new Date().getTime();
+                  var className = next.date - now < 0 ? "past" : "future";
+                  return (
+                    <li className={className}>
+                      {Number(next.age).toLocaleString()}{" "}
+                      {this.props.getUnit().label}:{" "}
+                      {new Date(next.date).toLocaleString()}
+                    </li>
+                  );
+                })}
           </ul>
         </details>
         <button
