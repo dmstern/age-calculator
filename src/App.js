@@ -76,8 +76,10 @@ export default class App extends Component {
             </label>
             <label>
               <span>Geburtstag: </span>
-              <input type="date" name="birthday" required />
-              <input type="time" name="birthtime" required />
+              <span className="dateTimePicker">
+                <input type="date" name="birthday" required />
+                <input type="time" name="birthtime" required />
+              </span>
             </label>
             <div className="formFooter">
               <button type="submit">
