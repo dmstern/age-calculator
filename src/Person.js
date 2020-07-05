@@ -12,8 +12,7 @@ export default class Person extends Component {
     var birthdayTime = Date.parse(
       `${this.props.birthDate} ${this.props.birthTime}`
     );
-    var date = new Date(birthdayTime);
-    var birthday = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    var birthday = new Date(birthdayTime).toLocaleString();
     this.setState({
       birthdayTime,
       birthday,
