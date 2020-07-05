@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { createLogicalAnd } from "typescript";
 
 export default class Person extends Component {
   constructor(state, props) {
