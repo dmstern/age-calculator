@@ -90,7 +90,7 @@ export default class App extends Component {
               <button type="reset">
                 {" "}
                 <span role="img" aria-label="Reset">
-                  🔃
+                  ❌
                 </span>{" "}
                 Zurücksetzen
               </button>

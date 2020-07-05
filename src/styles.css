@@ -86,6 +86,10 @@ button.remove {
   min-height: 2.4rem;
 }
 
+.formFooter button[type="reset"] {
+  margin-left: 0.5rem;
+}
+
 .forms {
   display: flex;
 }
