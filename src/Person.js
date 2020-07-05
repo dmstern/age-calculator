@@ -38,11 +38,7 @@ export default class Person extends Component {
         {this.props.getUnit().label} alt.
         <details>
           <summary>
-            <span
-              role="img"
-              title="Nächster runder Geburtsmoment"
-              aria-label="Next Birthday"
-            >
+            <span role="img" aria-label="Next Birthday">
               Nächster runder Geburtsmoment: 🎉
             </span>
           </summary>
