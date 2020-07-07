@@ -26,8 +26,12 @@ form label {
   display: flex;
 }
 
-.dateTimePicker input {
-  width: 50%;
+.dateTimePicker input[type="date"] {
+  width: 60%;
+}
+
+.dateTimePicker input[type="time"] {
+  width: 40%;
 }
 
 form label span {
