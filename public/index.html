@@ -23,6 +23,13 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Age Calculator</title>
+    <script>
+      // Set language
+      var language = (navigator.language || navigator.userLanguage).split(
+        "-"
+      )[0];
+      document.querySelector("html").lang = language;
+    </script>
   </head>
 
   <body>

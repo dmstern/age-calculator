@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./styles.css";
 import Person from "./Person";
 import units from "./Units";
+import { l10n } from "./l10n";
 
 export default class App extends Component {
   constructor() {
@@ -27,7 +28,13 @@ export default class App extends Component {
         name={name}
         birthDate={birthDate}
         birthTime={birthTime}
-        getUnit={() => this.units[this.state.unit]}
+        getLabels={this.getLabels}
+        getUnit={() => {
+          return {
+            factor: this.units[this.state.unit].factor,
+            label: this.getLabels()[this.state.unit],
+          };
+        }}
         remove={() => {
           this.removePerson(hash);
         }}
@@ -43,9 +50,9 @@ export default class App extends Component {
 
   removePerson(id) {
     var really = window.confirm(
-      `Willst du ${
+      `${this.getLabels().doYouWant} ${
         this.state.persons.find((person) => person.props.id === id).props.name
-      } wirklich aus der Liste entfernen?`
+      } ${this.getLabels().fromTheList}`
     );
     if (really) {
       var persons = this.state.persons.filter(
@@ -64,41 +71,41 @@ export default class App extends Component {
     });
   };
 
+  getLabels() {
+    var lang = document.querySelector("html").lang;
+
+    if (!(lang in l10n)) {
+      lang = "en";
+    }
+
+    return l10n[lang];
+  }
+
   render() {
     return (
       <div className="App" onSubmit={this.submit}>
-        <h1>Age Calculator</h1>
+        <h1>{this.getLabels().appName}</h1>
         <div className="forms">
           <form id="form">
             <label>
-              <span>Name: </span>
+              <span>{this.getLabels().name}: </span>
               <input type="text" name="name" required />
             </label>
             <label>
-              <span>Geburtstag: </span>
+              <span>{this.getLabels().birthday}: </span>
               <span className="dateTimePicker">
                 <input type="date" name="birthday" required />
                 <input type="time" name="birthtime" required />
               </span>
             </label>
             <div className="formFooter">
-              <button type="submit">
-                <span role="img" aria-label="Add">
-                  ➕ Hinzufügen
-                </span>
-              </button>
-              <button type="reset">
-                {" "}
-                <span role="img" aria-label="Reset">
-                  ❌
-                </span>{" "}
-                Zurücksetzen
-              </button>
+              <button type="submit">➕ {this.getLabels().add}</button>
+              <button type="reset"> ❌ {this.getLabels().reset}</button>
             </div>
           </form>
           <form>
             <label>
-              <span>Einheit: </span>
+              <span>{this.getLabels().unit}: </span>
               <select
                 name="unit"
                 defaultValue={
@@ -110,7 +117,7 @@ export default class App extends Component {
               >
                 {Object.entries(this.units).map(([key, value]) => (
                   <option value={key} name={key} key={key}>
-                    {value.label}
+                    {this.getLabels()[key]}
                   </option>
                 ))}
               </select>

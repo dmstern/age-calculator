@@ -29,18 +29,14 @@ export default class Person extends Component {
         <span
           title={`* ${this.state.birthday}`}
           role="img"
-          aria-label="Date of Birth"
+          aria-label={this.props.getLabels().dateOfBirth}
         >
           🐣
         </span>{" "}
-        ist jetzt {Number(this.state.age).toLocaleString()}{" "}
-        {this.props.getUnit().label} alt.
+        {this.props.getLabels().isNow} {Number(this.state.age).toLocaleString()}{" "}
+        {this.props.getUnit().label} {this.props.getLabels().old}.
         <details>
-          <summary>
-            <span role="img" aria-label="Next Birthday">
-              Nächster runder Geburtsmoment: 🎉
-            </span>
-          </summary>
+          <summary>{this.props.getLabels().nextMoment}: 🎉</summary>
           <ul>
             {this.state.next &&
               this.state.next
@@ -61,11 +57,9 @@ export default class Person extends Component {
         <button
           className="remove"
           onClick={this.props.remove}
-          title="Entfernen"
+          title={this.props.getLabels().remove}
         >
-          <span role="img" aria-label="Remove">
-            ➖
-          </span>
+          ➖
         </button>
       </div>
     );
