@@ -133,3 +133,8 @@ details li.past {
 summary {
   cursor: pointer;
 }
+
+footer {
+  margin-top: 5rem;
+  font-size: 10pt;
+}
