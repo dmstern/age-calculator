@@ -27,11 +27,11 @@ form label {
 }
 
 .dateTimePicker input[type="date"] {
-  width: 60%;
+  width: 55%;
 }
 
 .dateTimePicker input[type="time"] {
-  width: 40%;
+  width: 45%;
 }
 
 form label span {

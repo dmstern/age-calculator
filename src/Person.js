@@ -72,7 +72,7 @@ export default class Person extends Component {
   }
 
   update = () => {
-    var now = new Date().getTime();
+    var now = Date.now();
 
     var age = Math.floor(
       (now - this.state.birthdayTime) / this.props.getUnit().factor
