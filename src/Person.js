@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Icon from "./Icons";
+import { TrashIcon } from "./Icons";
 
 export default class Person extends Component {
   constructor(state, props) {
@@ -26,17 +26,18 @@ export default class Person extends Component {
   render() {
     return (
       <div className="person">
-        {this.props.name}
+        {this.props.name} (
         <span
-          title={`* ${this.state.birthday}`}
+          title={`🐣 ${this.state.birthday}`}
           role="img"
           className="emoji"
           aria-label={this.props.getLabels().dateOfBirth}
         >
           🐣
-        </span>{" "}
-        {this.props.getLabels().isNow} {Number(this.state.age).toLocaleString()}{" "}
-        {this.props.getUnit().label} {this.props.getLabels().old}.
+        </span>
+        ) {this.props.getLabels().isNow}{" "}
+        {Number(this.state.age).toLocaleString()} {this.props.getUnit().label}{" "}
+        {this.props.getLabels().old}.
         <details open>
           <summary>
             {this.props.getLabels().nextMoment}:{" "}
@@ -66,7 +67,7 @@ export default class Person extends Component {
           onClick={this.props.remove}
           title={this.props.getLabels().remove}
         >
-          <Icon icon="trash" />
+          <TrashIcon />
         </button>
       </div>
     );

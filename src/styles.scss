@@ -65,9 +65,18 @@ select {
   }
 }
 
-button.remove {
-  margin-left: 1rem;
-  float: right;
+button {
+  &.remove {
+    margin-left: 1rem;
+    float: right;
+  }
+
+  .icon {
+    width: 1em;
+    height: auto;
+    vertical-align: text-top;
+    margin-right: 0.3em;
+  }
 }
 
 .formFooter {
