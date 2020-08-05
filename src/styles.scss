@@ -52,7 +52,12 @@ form {
 
 .persons {
   margin-top: 50px;
-  font-size: 20px;
+}
+
+.person {
+  &__age {
+    font-size: 20px;
+  }
 }
 
 input[type="text"],
@@ -66,9 +71,13 @@ select {
 }
 
 button {
-  &.remove {
+  &.btn--remove {
     margin-left: 1rem;
     float: right;
+  }
+
+  &.btn--naked {
+    background: none;
   }
 
   .icon {
@@ -130,17 +139,87 @@ details {
   display: inline-block;
   vertical-align: text-top;
   margin-left: 1rem;
+  vertical-align: top;
 
   li.past {
     color: darkred;
     text-decoration: line-through;
     opacity: 0.7;
   }
+
+  summary {
+    cursor: pointer;
+    display: inline-block;
+    list-style: none;
+    padding: 0.2em 1em 0.5em;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  span,
+  svg {
+    vertical-align: text-bottom;
+  }
+
+  .icon {
+    transition: transform 300ms ease;
+    margin-left: 0.5em;
+  }
+
+  .icon--show {
+    max-width: 1em;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .icon--hide {
+    margin: 0;
+    max-width: 0;
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  &[open] {
+    .icon--show {
+      margin: 0;
+      max-width: 0;
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .icon--hide {
+      max-width: 1em;
+      opacity: 1;
+      margin-left: 0.5em;
+      transform: scaleX(1);
+    }
+  }
 }
 
-summary {
-  cursor: pointer;
-  /* text-decoration: dotted underline; */
+@keyframes shake {
+  0% {
+    transform: rotate(10deg) scale(1);
+  }
+
+  20% {
+    transform: rotate(-10deg) scale(1.5);
+  }
+
+  40% {
+    transform: rotate(10deg) scale(1);
+  }
+}
+
+.party {
+  display: inline-block;
+  animation-name: shake;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+  animation-delay: 2s;
 }
 
 footer {

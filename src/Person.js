@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TrashIcon } from "./Icons";
+import { TrashIcon, ShowIcon, BellIcon, HideIcon } from "./Icons";
 
 export default class Person extends Component {
   constructor(state, props) {
@@ -26,26 +26,42 @@ export default class Person extends Component {
   render() {
     return (
       <div className="person">
-        {this.props.name} (
-        <span
-          title={`🐣 ${this.state.birthday}`}
-          role="img"
-          className="emoji"
-          aria-label={this.props.getLabels().dateOfBirth}
-        >
-          🐣
+        <span className="person__text">
+          <span className="person__name">{this.props.name}</span> (
+          <span
+            title={`🐣 ${this.state.birthday}`}
+            role="img"
+            className="emoji"
+            aria-label={this.props.getLabels().dateOfBirth}
+          >
+            🐣
+          </span>
+          ) {this.props.getLabels().isNow}{" "}
+          <strong className="person__age">
+            {Number(this.state.age).toLocaleString()}{" "}
+          </strong>
+          {this.props.getUnit().label} {this.props.getLabels().old}.
         </span>
-        ) {this.props.getLabels().isNow}{" "}
-        {Number(this.state.age).toLocaleString()} {this.props.getUnit().label}{" "}
-        {this.props.getLabels().old}.
-        <details open>
+        <details>
           <summary>
-            {this.props.getLabels().nextMoment}:{" "}
-            <span className="emoji" role="img" aria-hidden="true">
+            <span
+              aria-label={this.props.getLabels().nextMoment}
+              className="party"
+              role="img"
+              aria-hidden="true"
+            >
               🎉
             </span>
+            <ShowIcon />
+            <HideIcon />
           </summary>
-          <ul>
+          <ul class="content">
+            <h3>
+              {this.props.getLabels().nextMoment}:{" "}
+              <span className="emoji" role="img" aria-hidden="true">
+                🎉
+              </span>
+            </h3>
             {this.state.next &&
               this.state.next
                 .sort((a, b) => a.age - b.age)
@@ -63,7 +79,7 @@ export default class Person extends Component {
           </ul>
         </details>
         <button
-          className="remove"
+          className="btn--naked btn--remove"
           onClick={this.props.remove}
           title={this.props.getLabels().remove}
         >
