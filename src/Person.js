@@ -30,6 +30,7 @@ export default class Person extends Component {
         <span
           title={`* ${this.state.birthday}`}
           role="img"
+          className="emoji"
           aria-label={this.props.getLabels().dateOfBirth}
         >
           🐣
@@ -37,7 +38,12 @@ export default class Person extends Component {
         {this.props.getLabels().isNow} {Number(this.state.age).toLocaleString()}{" "}
         {this.props.getUnit().label} {this.props.getLabels().old}.
         <details open>
-          <summary>{this.props.getLabels().nextMoment}: 🎉</summary>
+          <summary>
+            {this.props.getLabels().nextMoment}:{" "}
+            <span className="emoji" role="img" aria-hidden="true">
+              🎉
+            </span>
+          </summary>
           <ul>
             {this.state.next &&
               this.state.next
