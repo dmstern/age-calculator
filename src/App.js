@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./styles.css";
+import "./styles.scss";
 import Person from "./Person";
 import units from "./Units";
 import { l10n } from "./l10n";
@@ -84,16 +84,16 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App" onSubmit={this.submit}>
+      <div className="App container" onSubmit={this.submit}>
         <h1>{this.getLabels().appName}</h1>
         <div className="forms">
           <form id="form">
             <label>
-              <span>{this.getLabels().name}: </span>
+              <span className="label">{this.getLabels().name}: </span>
               <input type="text" name="name" required />
             </label>
             <label>
-              <span>{this.getLabels().birthday}: </span>
+              <span className="label">{this.getLabels().birthday}: </span>
               <span className="dateTimePicker">
                 <input type="date" name="birthday" required />
                 <input type="time" name="birthtime" required />
@@ -109,9 +109,9 @@ export default class App extends Component {
               </button>
             </div>
           </form>
-          <form>
+          <form className="unitForm">
             <label>
-              <span>{this.getLabels().unit}: </span>
+              <span className="label">{this.getLabels().unit}: </span>
               <select
                 name="unit"
                 defaultValue={
