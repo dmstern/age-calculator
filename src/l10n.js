@@ -22,6 +22,7 @@ const l10n = {
     months: "Monate",
     years: "Jahre",
     marsyears: "Marsjahre",
+    fromTheList: "wirklich von der Liste entfernen?",
   },
   en: {
     appName: "Age Calculator",
