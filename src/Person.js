@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Icon from "./Icons";
 
 export default class Person extends Component {
   constructor(state, props) {
@@ -35,7 +36,7 @@ export default class Person extends Component {
         </span>{" "}
         {this.props.getLabels().isNow} {Number(this.state.age).toLocaleString()}{" "}
         {this.props.getUnit().label} {this.props.getLabels().old}.
-        <details>
+        <details open>
           <summary>{this.props.getLabels().nextMoment}: 🎉</summary>
           <ul>
             {this.state.next &&
@@ -59,7 +60,7 @@ export default class Person extends Component {
           onClick={this.props.remove}
           title={this.props.getLabels().remove}
         >
-          ➖
+          <Icon icon="trash" />
         </button>
       </div>
     );

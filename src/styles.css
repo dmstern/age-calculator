@@ -6,6 +6,12 @@ body {
   padding: 20px;
 }
 
+@media (min-width: 768px) {
+  body {
+    max-width: 80vw;
+  }
+}
+
 form label {
   display: flex;
   margin-bottom: 0.5rem;
@@ -92,7 +98,7 @@ button.remove {
 
 [title][role="img"] {
   cursor: help;
-  text-decoration: dotted underline;
+  /* text-decoration: dotted underline; */
 }
 
 @media (pointer: coarse), (hover: none) {
@@ -128,7 +134,7 @@ details li.past {
 
 summary {
   cursor: pointer;
-  text-decoration: dotted underline;
+  /* text-decoration: dotted underline; */
 }
 
 footer {

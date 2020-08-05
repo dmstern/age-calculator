@@ -3,6 +3,7 @@ import "./styles.css";
 import Person from "./Person";
 import units from "./Units";
 import { l10n } from "./l10n";
+import Icon from "./Icons";
 
 export default class App extends Component {
   constructor() {
@@ -99,8 +100,13 @@ export default class App extends Component {
               </span>
             </label>
             <div className="formFooter">
-              <button type="submit">➕ {this.getLabels().add}</button>
-              <button type="reset"> ❌ {this.getLabels().reset}</button>
+              <button type="submit">
+                <Icon icon="addPerson" /> {this.getLabels().add}
+              </button>
+              <button type="reset">
+                {" "}
+                <Icon icon="reset" /> {this.getLabels().reset}
+              </button>
             </div>
           </form>
           <form>
